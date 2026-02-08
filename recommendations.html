@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рекомендации - Волейбол и защита коленей</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Шапка */
+        header {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Навигация */
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            background: white;
+            color: #27ae60;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            border: 2px solid #27ae60;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-btn:hover {
+            background: #27ae60;
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        /* Основной контент */
+        .content-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        h2 i {
+            color: #27ae60;
+        }
+        
+        /* Мастер подбора */
+        .wizard {
+            background: linear-gradient(135deg, #e8f6ef, #d1f2eb);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 6px solid #27ae60;
+        }
+        
+        .step {
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .step:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .step-number {
+            background: #27ae60;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .step-title {
+            font-size: 1.4rem;
+            color: #2c3e50;
+        }
+        
+        /* Варианты выбора */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .option {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .option:hover {
+            border-color: #27ae60;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(39, 174, 96, 0.2);
+        }
+        
+        .option.selected {
+            border-color: #27ae60;
+            background: #e8f6ef;
+        }
+        
+        .option-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        /* Результат */
+        .result {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 30px;
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .result-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .result-icon {
+            font-size: 3rem;
+        }
+        
+        .result-title {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+        
+        /* Кнопки */
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 20px;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #219653;
+            transform: translateY(-3px);
+        }
+        
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #d5d5d5;
+        }
+        
+        /* Рекомендации по типам */
+        .recommendation-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .rec-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-top: 5px solid;
+        }
+        
+        .rec-card.soft { border-color: #3498db; }
+        .rec-card.semi { border-color: #f39c12; }
+        .rec-card.hard { border-color: #e74c3c; }
+        
+        .rec-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .rec-icon {
+            font-size: 2.5rem;
+        }
+        
+        .rec-title {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin: 0;
+        }
+        
+        .price-tag {
+            background: #f8f9fa;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        
+        /* Чек-лист */
+        .checklist {
+            background: #e8f6ef;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .checklist-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .checkmark {
+            color: #27ae60;
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+        
+        /* Подвал */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+            margin-top: 50px;
+            border-top: 1px solid #ddd;
+        }
+        
+        .footer-info {
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .recommendation-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <h1>🎯 Практические рекомендации</h1>
+            <p class="subtitle">Как выбрать оптимальную защиту колена для волейбола на основе ваших целей и бюджета</p>
+        </div>
+    </header>
+
+    <!-- Навигация -->
+    <div class="container">
+        <div class="nav">
+            <a href="index.html" class="nav-btn">
+                <i class="fas fa-home"></i> Главная
+            </a>
+            <a href="research.html" class="nav-btn">
+                <i class="fas fa-chart-bar"></i> Исследование
+            </a>
+            <a href="#wizard" class="nav-btn" style="background: #27ae60; color: white;">
+                <i class="fas fa-magic"></i> Подбор защиты
+            </a>
+        </div>
+    </div>
+
+    <!-- Основной контент -->
+    <div class="container">
+        <!-- Мастер подбора -->
+        <section id="wizard" class="content-section">
+            <h2><i class="fas fa-magic"></i> Мастер подбора защиты</h2>
+            <p>Ответьте на 3 вопроса, чтобы получить персонализированную рекомендацию:</p>
+            
+            <div class="wizard">
+                <!-- Шаг 1 -->
+                <div class="step" id="step1">
+                    <div class="step-header">
+                        <div class="step-number">1</div>
+                        <div class="step-title">Какова ваша основная цель?</div>
+                    </div>
+                    
+                    <div class="options-grid">
+                        <div class="option" onclick="selectOption(1, 'prevention')">
+                            <div class="option-icon">🛡️</div>
+                            <h3>Профилактика</h3>
+                            <p>Хочу защитить здоровое колено во время тренировок</p>
+                        </div>
+                        
+                        <div class="option" onclick="selectOption(1, 'support')">
+                            <div class="option-icon">🤕</div>
+                            <h3>Поддержка</h3>
+                            <p>Была легкая травма, нужна дополнительная стабилизация</p>
+                        </div>
+                        
+                        <div class="option" onclick="selectOption(1, 'rehabilitation')">
+                            <div class="option-icon">🏥</div>
+                            <h3>Реабилитация</h3>
+                            <p>Восстановление после операции или серьезной травмы</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Шаг 2 -->
+                <div class="step" id="step2" style="display: none;">
+                    <div class="step-header">
+                        <div class="step-number">2</div>
+                        <div class="step-title">Какой у вас уровень игры?</div>
+                    </div>
+                    
+                    <div class="options-grid">
+                        <div class="option" onclick="selectOption(2, 'beginner')">
+                            <div class="option-icon">👶</div>
+                            <h3>Начинающий</h3>
+                            <p>Тренируюсь 1-2 раза в неделю, любительский уровень</p>
+                        </div>
+                        
+                        <div class="option" onclick="selectOption(2, 'amateur')">
+                            <div class="option-icon">🏐</div>
+                            <h3>Любитель</h3>
+                            <p>Регулярные тренировки, участвую в соревнованиях</p>
+                        </div>
+                        
+                        <div class="option" onclick="selectOption(2, 'professional')">
+                            <div class="option-icon">⭐</div>
+                            <h3>Профессионал</h3>
+                            <p>Ежедневные тренировки, профессиональные нагрузки</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Шаг 3 -->
+                <div class="step" id="step3" style="display: none;">
+                    <div class="step-header">
+                        <div class="step-number">3</div>
+                        <div class="step-title">Какой бюджет планируете?</div>
+                    </div>
+                    
+                    <div class="options-grid">
+                        <div class="option" onclick="selectOption(3, 'budget')">
+                            <div class="option-icon">💰</div>
+                            <h3>Бюджетный</h3>
+                            <p>До 3 000 рублей</p>
+                        </div>
+                        
+                        <div class="option" onclick="selectOption(3, 'medium')">
+                            <div class="option-icon">💎</div>
+                            <h3>Средний</h3>
+                            <p>3 000 - 8 000 рублей</p>
+                        </div>
+                        
+                        <div class="option" onclick="selectOption(3, 'premium')">
+                            <div class="option-icon">👑</div>
+                            <h3>Премиум</h3>
+                            <p>Готов инвестировать в здоровье (8 000+ рублей)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Кнопки навигации -->
+                <div class="buttons">
+                    <button class="btn btn-secondary" onclick="previousStep()" id="prevBtn" style="display: none;">
+                        <i class="fas fa-arrow-left"></i> Назад
+                    </button>
+                    <button class="btn btn-primary" onclick="nextStep()" id="nextBtn">
+                        Далее <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                
+                <!-- Результат -->
+                <div class="result" id="result">
+                    <div class="result-header">
+                        <div class="result-icon">🎯</div>
+                        <h3 class="result-title">Ваша рекомендация</h3>
+                    </div>
+                    
+                    <div id="resultContent">
+                        <!-- Сюда загрузится результат -->
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="resetWizard()" style="margin-top: 20px;">
+                        <i class="fas fa-redo"></i> Подобрать снова
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Готовые рекомендации -->
+        <section class="content-section">
+            <h2><i class="fas fa-tips"></i> Готовые рекомендации по типам</h2>
+            
+            <div class="recommendation-cards">
+                <!-- Мягкий бандаж -->
+                <div class="rec-card soft">
+                    <div class="rec-header">
+                        <div class="rec-icon">🛡️</div>
+                        <h3 class="rec-title">Мягкий бандаж</h3>
+                    </div>
+                    <div class="price-tag">500 - 3 000 ₽</div>
+                    <p><strong>Для кого:</strong> Начинающие волейболисты, профилактика</p>
+                    <p><strong>Когда выбирать:</strong></p>
+                    <ul style="margin: 10px 0 10px 20px; color: #555;">
+                        <li>Нет серьезных травм в анамнезе</li>
+                        <li>Хочется дополнительной уверенности</li>
+                        <li>Для согревания сустава в прохладном зале</li>
+                        <li>При легком дискомфорте после тренировок</li>
+                    </ul>
+                    <p><strong>Преимущества:</strong> Высокий комфорт, полная свобода движений</p>
+                </div>
+                
+                <!-- Полужесткий ортез -->
+                <div class="rec-card semi">
+                    <div class="rec-header">
+                        <div class="rec-icon">⚙️</div>
+                        <h3 class="rec-title">Полужесткий ортез</h3>
+                    </div>
+                    <div class="price-tag">2 000 - 8 000 ₽</div>
+                    <p><strong>Для кого:</strong> Опытные игроки, посттравматический период</p>
+                    <p><strong>Когда выбирать:</strong></p>
+                    <ul style="margin: 10px 0 10px 20px; color: #555;">
+                        <li>Были растяжения связок</li>
+                        <li>Ощущается нестабильность в суставе</li>
+                        <li>Возвращение к спорту после легкой травмы</li>
+                        <li>При повышенных нагрузках на соревнованиях</li>
+                    </ul>
+                    <p><strong>Преимущества:</strong> Хорошая стабилизация, регулируемая фиксация</p>
+                </div>
+                
+                <!-- Жесткий ортез -->
+                <div class="rec-card hard">
+                    <div class="rec-header">
+                        <div class="rec-icon">🩺</div>
+                        <h3 class="rec-title">Жесткий ортез</h3>
+                    </div>
+                    <div class="price-tag">10 000 - 20 000 ₽</div>
+                    <p><strong>Для кого:</strong> Реабилитация после операций</p>
+                    <p><strong>Когда выбирать:</strong></p>
+                    <ul style="margin: 10px 0 10px 20px; color: #555;">
+                        <li>После операций на ПКС или мениске</li>
+                        <li>По назначению врача-ортопеда</li>
+                        <li>При серьезных травмах со смещением</li>
+                        <li>Для контролируемой реабилитации</li>
+                    </ul>
+                    <p><strong>Важно:</strong> Только по рекомендации специалиста!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Чек-лист покупки -->
+        <section class="content-section">
+            <h2><i class="fas fa-check-circle"></i> Чек-лист при покупке</h2>
+            
+            <div class="checklist">
+                <div class="checklist-item">
+                    <div class="checkmark">✅</div>
+                    <div>
+                        <strong>Правильный размер</strong>
+                        <p>Измерьте обхват колена на 15 см выше и ниже сустава. Размерная сетка у каждого бренда своя!</p>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checkmark">✅</div>
+                    <div>
+                        <strong>Материал</strong>
+                        <p>Неопрен — для согревания, трикотаж — для легкой поддержки, смесовые материалы — для прочности</p>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checkmark">✅</div>
+                    <div>
+                        <strong>Примерка с движением</strong>
+                        <p>Примерить и сделать несколько приседаний, выпадов. Ничего не должно давить или натирать</p>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checkmark">✅</div>
+                    <div>
+                        <strong>Степень фиксации</strong>
+                        <p>Соответствует ли заявленная фиксация вашим задачам? Профилактика ≠ реабилитация</p>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checkmark">✅</div>
+                    <div>
+                        <strong>Гарантия и возврат</strong>
+                        <p>Уточните возможность возврата/обмена. Ортопедические изделия часто не подлежат возврату</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Где покупать -->
+        <section class="content-section">
+            <h2><i class="fas fa-shopping-cart"></i> Где лучше покупать?</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                <div style="background: #e3f2fd; padding: 20px; border-radius: 10px; border-left: 4px solid #2196f3;">
+                    <h3>🛒 Онлайн-магазины</h3>
+                    <p><strong>Wildberries, OZON, Яндекс.Маркет</strong></p>
+                    <p>+ Большой выбор, отзывы<br>+ Удобная доставка<br>- Нельзя примерить</p>
+                </div>
+                
+                <div style="background: #f3e5f5; padding: 20px; border-radius: 10px; border-left: 4px solid #9c27b0;">
+                    <h3>🏪 Спортмагазины</h3>
+                    <p><strong>Sportmaster, Декатлон</strong></p>
+                    <p>+ Можно примерить<br>+ Консультация продавца<br>- Ограниченный ассортимент</p>
+                </div>
+                
+                <div style="background: #e8f5e9; padding: 20px; border-radius: 10px; border-left: 4px solid #4caf50;">
+                    <h3>🏥 Ортопедические салоны</h3>
+                    <p><strong>«Ортосалон», «Медтехника»</strong></p>
+                    <p>+ Профессиональный подбор<br>+ Качественные бренды<br>- Высокие цены</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 25px; padding: 20px; background: #fff3cd; border-radius: 10px;">
+                <h3 style="color: #856404;"><i class="fas fa-exclamation-triangle"></i> Важно!</h3>
+                <p>Для жестких ортезов обязательно нужна консультация врача. Неправильно подобранный ортез может навредить!</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-info">
+                <p><strong>Научно-исследовательский проект</strong></p>
+                <p>«Влияние игры в волейбол на состояние коленного сустава»</p>
+                <p>Автор: Колоян Диана, 10Г класс | Руководитель: Пушков Г.Э.</p>
+                <p>ГБОУ Школа №2101, 2026 год</p>
+            </div>
+            <p style="margin-top: 20px; color: #888;">Рекомендации основаны на практическом исследовании 30 волейболистов</p>
+        </div>
+    </footer>
+
+    <script>
+        // Данные для подбора
+        const recommendations = {
+            prevention_beginner_budget: {
+                type: "Мягкий бандаж (неопрен/трикотаж)",
+                icon: "🛡️",
+                reason: "Идеально для начинающих: комфорт + доступная цена",
+                price: "500-3 000 ₽",
+                features: ["Высокий комфорт", "Полная свобода движений", "Согревание сустава"],
+                places: ["Спортмагазины", "Онлайн-маркеты"],
+                tips: ["Выбирайте размер точно по обхвату", "Неопрен лучше держит тепло"]
+            },
+            prevention_amateur_medium: {
+                type: "Мягкий бандаж премиум-класса",
+                icon: "💎",
+                reason: "Для регулярных тренировок нужна прочность + комфорт",
+                price: "2 000-5 000 ₽",
+                features: ["Усиленные боковые вставки", "Дышащий материал", "Анатомическая форма"],
+                places: ["Специализированные спортивные магазины"],
+                tips: ["Обратите внимание на компрессионные модели"]
+            },
+            support_amateur_medium: {
+                type: "Полужесткий ортез с ребрами",
+                icon: "⚙️",
+                reason: "Оптимальная стабилизация без потери подвижности",
+                price: "3 000-8 000 ₽",
+                features: ["Регулируемая фиксация", "Боковые стабилизаторы", "Съемные ребра жесткости"],
+                places: ["Ортопедические салоны", "Крупные спортивные магазины"],
+                tips: ["Примеряйте с движением", "Проверьте, не натирает ли"]
+            },
+            rehabilitation_professional_premium: {
+                type: "Жесткий функциональный ортез",
+                icon: "🩺",
+                reason: "Максимальная защита для восстановления после травм",
+                price: "10 000-20 000 ₽",
+                features: ["Шарнирный механизм", "Контроль диапазона движения", "Индивидуальная настройка"],
+                places: ["Специализированные ортопедические центры"],
+                tips: ["Только по назначению врача!", "Требует профессиональной настройки"]
+            }
+        };
+
+        // Переменные для отслеживания выбора
+        let currentStep = 1;
+        let selections = {
+            goal: null,
+            level: null,
+            budget: null
+        };
+
+        // Выбор опции
+        function selectOption(step, value) {
+            // Снять выделение со всех опций этого шага
+            const options = document.querySelectorAll(`#step${step} .option`);
+            options.forEach(opt => opt.classList.remove('selected'));
+            
+            // Выделить выбранную
+            event.currentTarget.classList.add('selected');
+            
+            // Сохранить выбор
+            if (step === 1) selections.goal = value;
+            if (step === 2) selections.level = value;
+            if (step === 3) selections.budget = value;
+            
+            // Активировать кнопку "Далее"
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        // Следующий шаг
+        function nextStep() {
+            if (currentStep < 3) {
+                // Скрыть текущий шаг
+                document.getElementById(`step${currentStep}`).style.display = 'none';
+                currentStep++;
+                // Показать следующий шаг
+                document.getElementById(`step${currentStep}`).style.display = 'block';
+                
+                // Показать кнопку "Назад"
+                document.getElementById('prevBtn').style.display = 'flex';
+                
+                // Если это последний шаг, изменить текст кнопки
+                if (currentStep === 3) {
+                    document.getElementById('nextBtn').innerHTML = 'Получить рекомендацию <i class="fas fa-check"></i>';
+                }
+            } else {
+                // Последний шаг - показать результат
+                showResult();
+            }
+        }
+
+        // Предыдущий шаг
+        function previousStep() {
+            if (currentStep > 1) {
+                document.getElementById(`step${currentStep}`).style.display = 'none';
+                currentStep--;
+                document.getElementById(`step${currentStep}`).style.display = 'block';
+                
+                if (currentStep === 1) {
+                    document.getElementById('prevBtn').style.display = 'none';
+                }
+                
+                document.getElementById('nextBtn').innerHTML = 'Далее <i class="fas fa-arrow-right"></i>';
+            }
+        }
+
+        // Показать результат
+        function showResult() {
+            // Определить ключ рекомендации
+            let key = `${selections.goal}_${selections.level}_${selections.budget}`;
+            
+            // Если точной рекомендации нет, выбрать ближайшую
+            let recommendation;
+            if (recommendations[key]) {
+                recommendation = recommendations[key];
+            } else {
+                // Ближайшая рекомендация
+                if (selections.goal === 'prevention') {
+                    recommendation = recommendations.prevention_beginner_budget;
+                } else if (selections.goal === 'support') {
+                    recommendation = recommendations.support_amateur_medium;
+                } else {
+                    recommendation = recommendations.rehabilitation_professional_premium;
+                }
+            }
+            
+            // Заполнить результат
+            const resultHTML = `
+                <div style="background: rgba(255,255,255,0.2); padding: 25px; border-radius: 10px; margin: 20px 0;">
+                    <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 20px;">
+                        <div style="font-size: 3rem;">${recommendation.icon}</div>
+                        <div>
+                            <h4 style="margin: 0 0 10px 0; font-size: 1.5rem;">${recommendation.type}</h4>
+                            <p style="margin: 0; opacity: 0.9;">${recommendation.reason}</p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                        <div>
+                            <h5 style="margin: 0 0 10px 0;">💰 Цена</h5>
+                            <div style="font-size: 1.3rem; font-weight: bold;">${recommendation.price}</div>
+                        </div>
+                        
+                        <div>
+                            <h5 style="margin: 0 0 10px 0;">✅ Особенности</h5>
+                            <ul style="margin: 0; padding-left: 20px;">
+                                ${recommendation.features.map(f => `<li>${f}</li>`).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h5 style="margin: 0 0 10px 0;">🛒 Где купить</h5>
+                            <p>${recommendation.places.join(', ')}</p>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 25px; padding: 15px; background: rgba(255,255,255,0.3); border-radius: 8px;">
+                        <h5 style="margin: 0 0 10px 0;">💡 Советы по выбору</h5>
+                        <ul style="margin: 0; padding-left: 20px;">
+                            ${recommendation.tips.map(t => `<li>${t}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('resultContent').innerHTML = resultHTML;
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('wizard').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Сброс мастера
+        function resetWizard() {
+            currentStep = 1;
+            selections = { goal: null, level: null, budget: null };
+            
+            // Сбросить отображение
+            document.querySelectorAll('.step').forEach((step, index) => {
+                step.style.display = index === 0 ? 'block' : 'none';
+            });
+            
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('prevBtn').style.display = 'none';
+            document.getElementById('nextBtn').innerHTML = 'Далее <i class="fas fa-arrow-right"></i>';
+            document.getElementById('nextBtn').disabled = true;
+            
+            document.getElementById('step1').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('nextBtn').disabled = true;
+        });
+    </script>
+</body>
+</html>
